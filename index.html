@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarginFlow | Convert More Ad Leads into Booked Jobs</title>
+    <meta name="description" content="MarginFlow builds done-for-you quote and follow-up systems so contractors turn more paid ad leads into booked jobs automatically.">
+    <style>
+        :root {
+            --accent: #0b6ef6;
+            --text: #1e1f24;
+            --muted: #5a5c63;
+            --bg: #ffffff;
+            --card-bg: #f6f8fb;
+            --max-width: 1140px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            gap: 6rem;
+            padding: 0 1.5rem 6rem;
+        }
+
+        section {
+            width: 100%;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .hero {
+            padding: 5rem 0 3rem;
+        }
+
+        .hero .container {
+            display: grid;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .preheading {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: clamp(2.4rem, 5vw, 3.6rem);
+            line-height: 1.1;
+            margin: 0.5rem 0 1.25rem;
+        }
+
+        h2 {
+            font-size: clamp(1.75rem, 4vw, 2.4rem);
+            margin: 0 0 1rem;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            margin: 0 0 0.5rem;
+        }
+
+        p {
+            margin: 0 0 1rem;
+            color: var(--muted);
+        }
+
+        .cta-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.85rem 1.75rem;
+            border-radius: 999px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: #fff;
+            box-shadow: 0 10px 25px rgba(11, 110, 246, 0.15);
+        }
+
+        .btn-primary:hover,
+        .btn-primary:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 30px rgba(11, 110, 246, 0.22);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text);
+            border: 1.5px solid rgba(30, 31, 36, 0.18);
+        }
+
+        .btn-secondary:hover,
+        .btn-secondary:focus {
+            border-color: rgba(11, 110, 246, 0.6);
+            color: var(--accent);
+        }
+
+        .video-section iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border: none;
+            border-radius: 18px;
+            box-shadow: 0 18px 40px rgba(19, 42, 92, 0.13);
+            background: #000;
+        }
+
+        .video-caption {
+            margin-top: 1rem;
+            text-align: center;
+            font-size: 0.95rem;
+            color: var(--muted);
+        }
+
+        .card-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 1.75rem;
+            border-radius: 20px;
+            display: grid;
+            gap: 0.35rem;
+            min-height: 100%;
+        }
+
+        .card span {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .how-it-works {
+            background-color: #f9fbff;
+            border-radius: 28px;
+            padding: 3rem 2rem;
+        }
+
+        .steps {
+            display: grid;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .step {
+            position: relative;
+            padding-left: 3.5rem;
+        }
+
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 999px;
+            background-color: rgba(11, 110, 246, 0.12);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .form-section form {
+            display: grid;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .form-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border-radius: 12px;
+            border: 1.5px solid rgba(30, 31, 36, 0.18);
+            font-size: 1rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(11, 110, 246, 0.12);
+        }
+
+        .thank-you {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            border-radius: 24px;
+            background-color: var(--card-bg);
+        }
+
+        .placeholder-embed {
+            margin-top: 1.5rem;
+            border-radius: 18px;
+            border: 1.5px dashed rgba(30, 31, 36, 0.25);
+            padding: 2rem;
+            color: var(--muted);
+        }
+
+        footer {
+            padding: 3rem 1.5rem 4rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(30, 31, 36, 0.6);
+        }
+
+        @media (min-width: 720px) {
+            main {
+                padding: 0 3rem 7rem;
+            }
+
+            .card-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .form-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .form-grid .full-width {
+                grid-column: span 2;
+            }
+        }
+
+        @media (min-width: 960px) {
+            .hero .container {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section class="hero" id="top">
+            <div class="container">
+                <div>
+                    <div class="preheading">MarginFlow for Contractors</div>
+                    <h1>Turn your ad clicks into booked jobs — automatically.</h1>
+                    <p>We build a done-for-you quote-and-follow-up system that converts 30–50% more leads from the same ad spend. You keep running the ads; we make sure they turn into scheduled work.</p>
+                    <div class="cta-group">
+                        <a class="btn btn-primary" href="#audit-form">Get My Free Audit</a>
+                        <a class="btn btn-secondary" href="#book-call">Book a 10-Minute Call</a>
+                    </div>
+                    <p style="margin-top: 1rem; font-size: 0.95rem;">Roofers, window installers, and remodelers use MarginFlow to answer every lead, quote instantly, and stay top of mind until the job is booked.</p>
+                </div>
+                <div>
+                    <div class="card" style="padding: 2rem;">
+                        <span>What contractors see in 30 days:</span>
+                        <ul style="margin: 0; padding-left: 1.2rem; color: var(--muted);">
+                            <li>Instant SMS responses to every paid lead.</li>
+                            <li>AI-assisted quotes that go out while competitors are still dialing.</li>
+                            <li>Automated follow-ups that push warm leads to book.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="video-section" id="video">
+            <div class="container">
+                <h2>Watch how contractors lose half their ad leads — and how to fix it.</h2>
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="MarginFlow overview video" allowfullscreen loading="lazy"></iframe>
+                <div class="video-caption">90-second breakdown of the biggest ad leak.</div>
+            </div>
+        </section>
+
+        <section class="pain-proof" id="proof">
+            <div class="container">
+                <h2>Plug the three leaks killing your paid leads.</h2>
+                <div class="card-grid">
+                    <div class="card">
+                        <span>Slow responses → Missed jobs</span>
+                        <p>MarginFlow answers every lead in under 60 seconds with instant SMS and AI-backed quote prompts.</p>
+                    </div>
+                    <div class="card">
+                        <span>Manual follow-ups → Lost warm leads</span>
+                        <p>An automated 3-day nurture keeps your estimate in front of homeowners until the job is booked.</p>
+                    </div>
+                    <div class="card">
+                        <span>No booking link → Clients ghost</span>
+                        <p>We plug in your calendar so hot leads can self-book without phone tag — even after hours.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="how-it-works" id="process">
+            <div class="container">
+                <h2>How MarginFlow puts your follow-up on autopilot.</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>We audit your current setup.</h3>
+                        <p>Free 24-hour audit of your lead capture, speed-to-lead, and booking flow. No fluff — just the leaks and the quick wins.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>We install your instant quote system.</h3>
+                        <p>MarginFlow installs SMS workflows, AI quote templates, and branded follow-up that fits the services you offer.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>You close more jobs — automatically.</h3>
+                        <p>Every new lead gets the same fast, professional experience. You just show up to booked appointments and close.</p>
+                    </div>
+                </div>
+                <div class="cta-group" style="margin-top: 3rem;">
+                    <a class="btn btn-primary" href="#audit-form">Get My Free Audit</a>
+                    <a class="btn btn-secondary" href="#book-call">Book a 10-Minute Call</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="form-section" id="audit-form">
+            <div class="container">
+                <h2>Free Ad-Lead Audit (24-Hour Turnaround).</h2>
+                <p>Find out exactly where your ad spend is leaking and how to fix it.</p>
+                <form action="https://tally.so/r/marginflow-audit" method="post">
+                    <div class="form-grid">
+                        <div>
+                            <label for="name">Name</label>
+                            <input id="name" name="name" type="text" placeholder="Chris Contractor" required>
+                        </div>
+                        <div>
+                            <label for="company">Company</label>
+                            <input id="company" name="company" type="text" placeholder="ABC Roofing" required>
+                        </div>
+                        <div>
+                            <label for="phone">Phone</label>
+                            <input id="phone" name="phone" type="tel" placeholder="(555) 123-4567" required>
+                        </div>
+                        <div>
+                            <label for="city">City</label>
+                            <input id="city" name="city" type="text" placeholder="Fort Worth, TX" required>
+                        </div>
+                        <div class="full-width">
+                            <label for="service">Service Type</label>
+                            <select id="service" name="service" required>
+                                <option value="">Select your primary service</option>
+                                <option value="roofing">Roofing</option>
+                                <option value="window-installation">Window Installation</option>
+                                <option value="remodeling">Remodeling</option>
+                                <option value="hvac">HVAC</option>
+                                <option value="solar">Solar</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Send My Audit</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="thank-you" id="book-call">
+            <div class="container">
+                <h2>Got it — we’ll send your audit in 24 hours.</h2>
+                <p>Want it faster? Book a 10-minute slot now.</p>
+                <div class="placeholder-embed">
+                    Cal.com embed goes here. Drop your scheduling link to let prospects pick a time instantly.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © MarginFlow 2025
+    </footer>
+</body>
+</html>
