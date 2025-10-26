@@ -15,7 +15,7 @@ export default function Home() {
               Built for growth-focused contractors
             </span>
             <h1 style={{ textAlign: 'center', marginBottom: '1rem' }}>
-              Watch how contractors lose half their ad leads — and how to fix it.
+              Watch how contractors save half their ad leads.
             </h1>
             <p style={{ textAlign: 'center', fontSize: '1.1rem', color: 'var(--muted)', marginBottom: '2rem', maxWidth: '600px', marginLeft: 'auto', marginRight: 'auto' }}>
               Most trades lose jobs after the click. See how MarginFlow turns your ad spend
