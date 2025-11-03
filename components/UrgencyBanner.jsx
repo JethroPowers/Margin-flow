@@ -8,9 +8,9 @@ export default function UrgencyBanner() {
       <div className="urgency-content">
         <span className="urgency-icon">⚡</span>
         <div className="urgency-text">
-          <strong>December 2025 Cohort:</strong> Only {spotsLeft} implementation slots remaining
+          <strong>November 2025 Cohort:</strong> Only {spotsLeft} implementation slots remaining
           <span className="urgency-divider">•</span>
-          <span>Lock in your spot before year-end</span>
+          <span>Go live in 14 days</span>
         </div>
       </div>
     </div>
