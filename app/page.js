@@ -22,11 +22,6 @@ export default function Home() {
               We fix your lead flow so you book more jobs from the same ad spend.
             </p>
 
-            <div className="urgency-pill">
-              <span className="pulse-dot"></span>
-              <strong>Live now:</strong> 47 contractors watching this video
-            </div>
-
             <div className="video-frame">
               <iframe
                 src="https://www.loom.com/embed/c370c31d43c046358c019b83a0bbf8d3?sid=e5f6d7c8-9a0b-1c2d-3e4f-5a6b7c8d9e0f"

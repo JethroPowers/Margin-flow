@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function SystemFlowchart() {
-  const [activeStage, setActiveStage] = useState(null);
+  const [activeStage, setActiveStage] = useState(-1);
+  const containerRef = useRef(null);
+  const stageRefs = useRef([]);
 
   const stages = [
     {
@@ -80,61 +82,105 @@ export default function SystemFlowchart() {
     }
   ];
 
+  // Scroll-based animation - triggers when stage is in center of screen
+  useEffect(() => {
+    const handleScroll = () => {
+      const windowHeight = window.innerHeight;
+      const centerY = windowHeight / 2;
+
+      let closestStage = -1;
+      let closestDistance = Infinity;
+
+      // Find which stage is closest to the center of the viewport
+      stageRefs.current.forEach((stageEl, index) => {
+        if (stageEl) {
+          const rect = stageEl.getBoundingClientRect();
+          const stageCenter = rect.top + rect.height / 2;
+          const distanceFromCenter = Math.abs(stageCenter - centerY);
+
+          // Only consider stages that are at least partially visible
+          if (rect.top < windowHeight && rect.bottom > 0) {
+            if (distanceFromCenter < closestDistance) {
+              closestDistance = distanceFromCenter;
+              closestStage = index;
+            }
+          }
+        }
+      });
+
+      // Update active stage with smooth transition
+      setActiveStage(closestStage);
+    };
+
+    // Use requestAnimationFrame for smooth scrolling
+    let ticking = false;
+    const smoothHandleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', smoothHandleScroll, { passive: true });
+    handleScroll(); // Check initial position
+
+    return () => window.removeEventListener('scroll', smoothHandleScroll);
+  }, []);
+
   return (
-    <div className="flowchart-container">
+    <div className="flowchart-container" ref={containerRef}>
       <div className="flowchart-header">
         <h2 className="section-title">The MarginFlow System: From Click to Booked Job</h2>
         <p className="flowchart-subtitle">
-          This is what happens behind the scenes when a lead clicks your ad.
-          Click each stage to see the details.
+          This is what happens behind the scenes when a lead clicks your ad. Scroll to see each stage.
         </p>
       </div>
 
-      <div className="flowchart-stages">
+      <div className="flowchart-stages-animated">
         {stages.map((stage, index) => (
-          <div key={stage.id} className="stage-wrapper">
-            <button
-              className={`stage-button ${activeStage === stage.id ? 'active' : ''}`}
-              onClick={() => setActiveStage(activeStage === stage.id ? null : stage.id)}
-            >
-              <div className="stage-header">
-                <span className="stage-number">Stage {stage.id}</span>
+          <div
+            key={stage.id}
+            className="stage-wrapper-animated"
+            ref={(el) => (stageRefs.current[index] = el)}
+          >
+            <div className={`stage-card ${activeStage === index ? 'active-animated' : ''} ${index < activeStage ? 'completed-animated' : ''}`}>
+              <div className="stage-header-animated">
+                <span className="stage-number-animated">{stage.id}</span>
                 <h3>{stage.title}</h3>
               </div>
-              <p className="stage-subtitle">{stage.subtitle}</p>
-              <span className="expand-icon">{activeStage === stage.id ? '−' : '+'}</span>
-            </button>
+              <p className="stage-subtitle-animated">{stage.subtitle}</p>
 
-            {activeStage === stage.id && (
-              <div className="stage-details">
+              {/* Show details when active */}
+              <div className={`stage-details-animated ${activeStage === index ? 'visible' : ''}`}>
                 {stage.steps && (
-                  <div className="flow-steps">
+                  <div className="flow-steps-animated">
                     {stage.steps.map((step, idx) => (
-                      <div key={idx} className="flow-step">
-                        <span className="step-icon">{step.icon}</span>
-                        <div className="step-content">
+                      <div key={idx} className="flow-step-animated">
+                        <span className="step-icon-animated">{step.icon}</span>
+                        <div className="step-content-animated">
                           <strong>{step.label}</strong>
-                          <span className="step-desc">{step.desc}</span>
+                          <span className="step-desc-animated">{step.desc}</span>
                         </div>
-                        {idx < stage.steps.length - 1 && <div className="flow-arrow">→</div>}
                       </div>
                     ))}
                   </div>
                 )}
 
                 {stage.branches && (
-                  <div className="flow-branches">
+                  <div className="flow-branches-animated">
                     {stage.branches.map((branch, idx) => (
-                      <div key={idx} className={`branch branch-${branch.color}`}>
-                        <div className="branch-label">{branch.label}</div>
+                      <div key={idx} className={`branch-animated branch-${branch.color}`}>
+                        <div className="branch-label-animated">{branch.label}</div>
                         {branch.steps.map((step, stepIdx) => (
-                          <div key={stepIdx} className="branch-step">
-                            <span className="step-icon">{step.icon}</span>
-                            <div className="step-content">
+                          <div key={stepIdx} className="branch-step-animated">
+                            <span className="step-icon-animated">{step.icon}</span>
+                            <div className="step-content-animated">
                               <strong>{step.text}</strong>
-                              <span className="step-desc">{step.desc}</span>
+                              <span className="step-desc-animated">{step.desc}</span>
                             </div>
-                            {stepIdx < branch.steps.length - 1 && <div className="flow-arrow-down">↓</div>}
                           </div>
                         ))}
                       </div>
@@ -143,20 +189,20 @@ export default function SystemFlowchart() {
                 )}
 
                 {stage.outcomes && (
-                  <div className="flow-outcomes">
+                  <div className="flow-outcomes-animated">
                     {stage.outcomes.map((outcome, idx) => (
-                      <div key={idx} className={`outcome outcome-${outcome.color}`}>
-                        <div className="outcome-header">
-                          <span className="outcome-icon">{outcome.icon}</span>
+                      <div key={idx} className={`outcome-animated outcome-${outcome.color}`}>
+                        <div className="outcome-header-animated">
+                          <span className="outcome-icon-animated">{outcome.icon}</span>
                           <strong>{outcome.label}</strong>
                         </div>
-                        <div className="outcome-actions">
+                        <div className="outcome-actions-animated">
                           {outcome.actions.map((action, actionIdx) => (
-                            <div key={actionIdx} className="action-item">
-                              <span className="action-icon">{action.icon}</span>
-                              <div className="action-content">
+                            <div key={actionIdx} className="action-item-animated">
+                              <span className="action-icon-animated">{action.icon}</span>
+                              <div className="action-content-animated">
                                 <strong>{action.text}</strong>
-                                <span className="action-desc">{action.desc}</span>
+                                <span className="action-desc-animated">{action.desc}</span>
                               </div>
                             </div>
                           ))}
@@ -166,9 +212,15 @@ export default function SystemFlowchart() {
                   </div>
                 )}
               </div>
-            )}
+            </div>
 
-            {index < stages.length - 1 && <div className="stage-connector">↓</div>}
+            {/* Animated connector between stages */}
+            {index < stages.length - 1 && (
+              <div className={`stage-connector-animated ${index < activeStage ? 'flowing' : ''} ${index === activeStage ? 'active-flow' : ''}`}>
+                <div className="flow-arrow-animated">↓</div>
+                <div className="flow-pulse"></div>
+              </div>
+            )}
           </div>
         ))}
       </div>
